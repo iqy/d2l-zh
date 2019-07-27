@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# The Straight Dope documentation build configuration file, created by
+# The D2L documentation build configuration file, created by
 # sphinx-quickstart on Tue Jul 18 10:40:45 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -72,10 +72,9 @@ source_suffix = ['.rst', '.ipynb', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = '动手学深度学习'
-copyright = '2017--2018, Contributors'
-author = "MXNet Community"
-
+project = '《动手学深度学习》'
+copyright = '2017--2019'
+author = "Aston Zhang\\\\Mu Li\\\\Zachary C. Lipton\\\\Alexander J. Smola"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -102,7 +101,8 @@ language = 'zh_CN'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '**.ipynb_checkpoints']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '**.ipynb_checkpoints',
+                    'mx-theme']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -136,7 +136,23 @@ todo_include_todos = True
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'sphinx_rtd_theme'
+# html_theme = 'sphinx_rtd_theme'
+
+html_theme_path = ['mx-theme']
+html_theme = 'mxtheme'
+html_theme_options = {
+    'primary_color': 'blue',
+    'accent_color': 'deep_orange',
+    'header_links' : [
+        ('伯克利深度学习课程', 'https://courses.d2l.ai/berkeley-stat-157/index.html', True, 'fas fa-user-graduate'),
+        ('PDF', 'https://zh.d2l.ai/d2l-zh.pdf', True, 'fas fa-file-pdf'),
+        ('Jupyter 记事本文件', 'https://zh.d2l.ai/d2l-zh.zip', True, 'fas fa-download'),
+        ('讨论', 'https://discuss.gluon.ai/c/lecture?order=views', True, 'fab fa-discourse'),
+        ('GitHub', 'https://github.com/d2l-ai/d2l-zh', True, 'fab fa-github'),
+        ('English Version', 'https://d2l.ai', True, 'fas fa-external-link-alt'),
+    ],
+    'show_footer': True
+}
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -148,14 +164,14 @@ html_theme = 'sphinx_rtd_theme'
 
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
-#html_title = 'The Straight Dope v0.1'
+#html_title = 'The D2L v0.1'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = '_static/gluon_white.png'
+# html_logo = '_static/gluon_white.png'
 
 # The name of an image file (relative to this directory) to use as a favicon of
 # the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -232,7 +248,7 @@ html_search_options = {'dict':jieba_dict}
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'TheStraightDopedoc'
+htmlhelp_basename = 'D2Ldoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -268,6 +284,9 @@ latex_elements = {
         \fancyhead[LE,RO]{{\py@HeaderFamily }}
      }
 \makeatother
+
+\CJKsetecglue{}
+\usepackage{zhnumber}
 ''',
 # The paper size ('letterpaper' or 'a4paper').
 #'papersize': 'letterpaper',
@@ -287,13 +306,13 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'gluon_tutorials_zh.tex', '动手学深度学习',
+    (master_doc, 'd2l-zh.tex', '动手学深度学习',
      author, 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
-latex_logo = '_static/gluon.png'
+#latex_logo = '_static/gluon.png'
 
 # latex_engine  = 'xelatex'
 # For "manual" documents, if this is true, then toplevel headings are parts,
@@ -318,7 +337,7 @@ latex_domain_indices = False
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'thestraightdope', 'The Straight Dope Documentation',
+    (master_doc, 'd2l-zh', 'The D2L Documentation',
      [author], 1)
 ]
 
@@ -332,8 +351,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'TheStraightDope', 'The Straight Dope Documentation',
-     author, 'TheStraightDope', 'One line description of project.',
+    (master_doc, 'd2l-zh', 'The D2L Documentation',
+     author, 'd2l-zh', 'One line description of project.',
      'Miscellaneous'),
 ]
 
@@ -353,6 +372,12 @@ texinfo_documents = [
 # Example configuration for intersphinx: refer to the Python standard library.
 # intersphinx_mapping = {'https://docs.python.org/': None}
 
+
+# Figure X.y (1 level)
+numfig = True
+numfig_secnum_depth = 1
+
+
 intersphinx_mapping = {
     # 'python': 'https://docs.python.org/3.5',
     # 'matplotlib': 'https://matplotlib.org',
@@ -366,10 +391,21 @@ nbsphinx_execute = 'never'
 # let the source file format to be xxx.ipynb instead of xxx.ipynb.txt
 html_sourcelink_suffix = ''
 
+def image_caption(app, docname, source):
+    for i, src in enumerate(source):
+        out = ''
+        for l in src.split('\n'):
+            if '![' in l and 'img' in l:
+                # Sphinx does not allow very long caption with space, replace space
+                # with a special token
+                l = l.strip().replace(' ', 'Ⓐ')
+            out += l + '\n'
+        source[i] = out
+
 def setup(app):
     app.add_transform(AutoStructify)
     app.add_config_value('recommonmark_config', {
     }, True)
-    app.add_javascript('baidu_tongji.js')
     app.add_javascript('google_analytics.js')
-    app.add_stylesheet('gluon.css')
+    app.add_javascript('discuss.js')
+    app.connect('source-read', image_caption)

@@ -1,8 +1,8 @@
 all: html
 
-build/%.ipynb: %.md build/build.yml build/md2ipynb.py $(wildcard gluonbook/*)
+build/%.ipynb: %.md build/env.yml $(wildcard d2lzh/*)
 	@mkdir -p $(@D)
-	cd $(@D); python ../md2ipynb.py ../../$< ../../$@
+	cd $(@D); python ../utils/md2ipynb.py ../../$< ../../$@
 
 build/%.md: %.md
 	@mkdir -p $(@D)
@@ -14,43 +14,42 @@ NOTEBOOK = $(filter-out $(MARKDOWN), $(wildcard chapter*/*.md))
 OBJ = $(patsubst %.md, build/%.md, $(MARKDOWN)) \
 	$(patsubst %.md, build/%.ipynb, $(NOTEBOOK))
 
-ORIGN_DEPS = $(wildcard img/* data/* gluonbook/*) environment.yml README.md
-DEPS = $(patsubst %, build/%, $(ORIGN_DEPS))
+FRONTPAGE_DIR = img/frontpage
+FRONTPAGE = $(wildcard $(FRONTPAGE_DIR)/*)
+FRONTPAGE_DEP = $(patsubst %, build/%, $(FRONTPAGE))
 
-PKG = build/_build/html/gluon_tutorials_zh.tar.gz build/_build/html/gluon_tutorials_zh.zip
+IMG_NOTEBOOK = $(filter-out $(FRONTPAGE_DIR), $(wildcard img/*))
+ORIGIN_DEPS = $(IMG_NOTEBOOK) $(wildcard data/* d2lzh/*) environment.yml README.md
+DEPS = $(patsubst %, build/%, $(ORIGIN_DEPS))
+
+PKG = build/_build/html/d2l-zh.zip
 
 pkg: $(PKG)
 
-build/_build/html/gluon_tutorials_zh.zip: $(OBJ) $(DEPS)
-	cd build; zip -r $(patsubst build/%, %, $@ $(DEPS)) chapter*
+build/_build/html/d2l-zh.zip: $(OBJ) $(DEPS)
+	cd build; zip -r $(patsubst build/%, %, $@ $(DEPS)) chapter*/*md chapter*/*ipynb
 
-build/_build/html/gluon_tutorials_zh.tar.gz: $(OBJ) $(DEPS)
-	cd build; tar -zcvf $(patsubst build/%, %, $@ $(DEPS)) chapter*
-
+# Copy XX to build/XX if build/XX is depended (e.g., $(DEPS))
 build/%: %
 	@mkdir -p $(@D)
 	@cp -r $< $@
 
-html: $(DEPS) $(OBJ)
+html: $(DEPS) $(FRONTPAGE_DEP) $(OBJ)
 	make -C build html
-	bash build/htaccess.sh build/_build/html/
-	cp build/tencent1668843323268181422.txt build/_build/html/tencent1668843323268181422.txt
+	python build/utils/post_html.py
+	cp -r img/frontpage/ build/_build/html/_images/
+	# Enable horitontal scrollbar for wide code blocks
+	sed -i s/white-space\:pre-wrap\;//g build/_build/html/_static/sphinx_materialdesign_theme.css
 
-TEX=build/_build/latex/gluon_tutorials_zh.tex
-
-SVG=$(wildcard img/*.svg)
-GIF=$(wildcard img/*.gif)
+TEX=build/_build/latex/d2l-zh.tex
 
 build/_build/latex/%.pdf: img/%.svg
 	@mkdir -p $(@D)
 	rsvg-convert -f pdf -z 0.80 -o $@ $<
 
-build/_build/latex/%_00.pdf: img/%_00.pdf
-	@mkdir -p $(@D)
-	cp $< $@
+SVG=$(wildcard img/*.svg)
 
-PDFIMG = $(patsubst img/%.svg, build/_build/latex/%.pdf, $(SVG)) \
-	$(patsubst img/%.gif, build/_build/latex/%_00.pdf, $(GIF))
+PDFIMG = $(patsubst img/%.svg, build/_build/latex/%.pdf, $(SVG))
 
 pdf: $(DEPS) $(OBJ) $(PDFIMG)
 	@echo $(PDFIMG)
@@ -61,14 +60,20 @@ pdf: $(DEPS) $(OBJ) $(PDFIMG)
 	sed -i s/{\\\\releasename}{发布}/{\\\\releasename}{}/g $(TEX)
 	sed -i s/{OriginalVerbatim}\\\[commandchars=\\\\\\\\\\\\{\\\\}\\\]/{OriginalVerbatim}\\\[commandchars=\\\\\\\\\\\\{\\\\},formatcom=\\\\footnotesize\\\]/g $(TEX)
 	sed -i s/\\\\usepackage{geometry}/\\\\usepackage[paperwidth=187mm,paperheight=235mm,left=20mm,right=20mm,top=20mm,bottom=15mm,includefoot]{geometry}/g $(TEX)
+	# Allow figure captions to include space and autowrap
+	sed -i s/Ⓐ/\ /g ${TEX}
 	# Remove un-translated long table descriptions
 	sed -i /\\\\multicolumn{2}{c}\%/d $(TEX)
 	sed -i /\\\\sphinxtablecontinued{Continued\ on\ next\ page}/d $(TEX)
 	sed -i /{\\\\tablename\\\\\ \\\\thetable{}\ --\ continued\ from\ previous\ page}/d $(TEX)
+	sed -i s/\\\\maketitle/\\\\maketitle\ \\\\pagebreak\\\\hspace{0pt}\\\\vfill\\\\begin{center}本书稿为测试版本（\ 生成日期：\\\\zhtoday\ ）。\\\\\\\\\ 访问\\\\url{https:\\/\\/zh.d2l.ai}，获取本书的最新版本或正式版本。\\\\end{center}\\\\vfill\\\\hspace{0pt}\\\\pagebreak/g $(TEX)
+
+	python build/utils/post_latex.py zh
+
 	cd build/_build/latex && \
-	bash ../../convert_output_svg.sh && \
-	buf_size=10000000 xelatex gluon_tutorials_zh.tex && \
-	buf_size=10000000 xelatex gluon_tutorials_zh.tex
+	bash ../../utils/convert_output_svg.sh && \
+	buf_size=10000000 xelatex d2l-zh.tex && \
+	buf_size=10000000 xelatex d2l-zh.tex
 
 clean:
-	rm -rf build/chapter* build/_build $(DEPS) $(PKG)
+	rm -rf build/chapter* build/_build build/img build/data build/environment.yml build/README.md $(PKG)

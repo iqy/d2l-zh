@@ -2,6 +2,12 @@
 
 鞍点，saddle point
 
+背景变量，context variable
+
+背景窗口，context window
+
+背景词，context word
+
 背景向量，context vector
 
 变换，transform
@@ -44,6 +50,8 @@
 
 端到端，end-to-end
 
+多层感知机，multilayer perceptron
+
 二元分类，binary classification
 
 二次采样，subsample
@@ -55,6 +63,8 @@
 泛化误差，generalization error
 
 方差，variance
+
+访问参数，access parameters
 
 非凸优化，non-convex optimization
 
@@ -68,13 +78,17 @@
 
 负采样，negative sampling
 
+感受野，receptive field
+
+格拉姆矩阵，Gram matrix
+
 共现词频，co-occurrence frequency
 
 归一化，normalization
 
 过滤器，filter
 
-过拟合，underfitting
+过拟合，overfitting
 
 恒等映射，identity mapping
 
@@ -118,21 +132,23 @@
 
 流水线，pipeline
 
-softmax回归，softmax regression
-
 模型参数，model parameter
 
 模型复杂度，model complexity
+
+目标检测，object detection
 
 偏差，bias
 
 偏导数，partial derivative
 
+偏移量，offset
+
 批量，batch
 
 平均池化层，average pooling layer
 
-欠拟合，overfitting
+欠拟合，underfitting
 
 情感分析，sentiment analysis
 
@@ -140,19 +156,29 @@ softmax回归，softmax regression
 
 权重，weight
 
+上采样，upsample
+
 实例，instance
 
 收敛，converge
 
+属性，property
+
 数值方法，numerical method
 
 数据集，data set
+
+数据样本，data instance
+
+softmax回归，softmax regression
 
 损失函数，loss function
 
 双向循环神经网络，bidirectional recurrent neural network
 
 特征，feature
+
+特征图，feature map
 
 特征值，eigenvalue
 

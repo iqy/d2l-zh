@@ -1,11 +1,11 @@
 # 数学基础
 
-本节总结了本书中涉及到的有关线性代数、微分和概率的基础知识。为避免赘述本书未涉及的数学背景知识，本节中的少数定义稍有简化。
+本节总结了本书中涉及的有关线性代数、微分和概率的基础知识。为避免赘述本书未涉及的数学背景知识，本节中的少数定义稍有简化。
 
 
 ## 线性代数
 
-以下分别概括了向量、矩阵、运算、范数、特征向量和特征值的概念。
+下面分别概括了向量、矩阵、运算、范数、特征向量和特征值的概念。
 
 ### 向量
 
@@ -79,7 +79,7 @@ $$
 $$
 
 
-两个相同形状的矩阵的加法实际上是按元素做加法：
+两个相同形状的矩阵的加法是将两个矩阵按元素做加法：
 
 $$
 \boldsymbol{A} + \boldsymbol{B} = 
@@ -109,14 +109,14 @@ $$
 $$
 k\boldsymbol{A} = 
 \begin{bmatrix}
-    ka_{11} & ka_{21} & \dots  & ka_{m1} \\
-    ka_{12} & ka_{22} & \dots  & ka_{m2} \\
+    ka_{11} & ka_{12} & \dots  & ka_{1n} \\
+    ka_{21} & ka_{22} & \dots  & ka_{2n} \\
     \vdots & \vdots   & \ddots & \vdots \\
-    ka_{1n} & ka_{2n} & \dots  & ka_{mn}
+    ka_{m1} & ka_{m2} & \dots  & ka_{mn}
 \end{bmatrix}.
 $$
 
-其它例如标量与矩阵按元素相加、相除等运算与上式中的相乘运算类似。矩阵按元素开根号、取对数等运算也即对矩阵每个元素开根号、取对数等，并得到和原矩阵形状相同的矩阵。
+其他诸如标量与矩阵按元素相加、相除等运算与上式中的相乘运算类似。矩阵按元素开根号、取对数等运算也就是对矩阵每个元素开根号、取对数等，并得到和原矩阵形状相同的矩阵。
 
 矩阵乘法和按元素的乘法不同。设$\boldsymbol{A}$为$m$行$p$列的矩阵，$\boldsymbol{B}$为$p$行$n$列的矩阵。两个矩阵相乘的结果
 
@@ -147,11 +147,11 @@ $$a_{i1}b_{1j}  + a_{i2}b_{2j} + \ldots + a_{ip}b_{pj} = \sum_{k=1}^p a_{ik}b_{k
 
 设$n$维向量$\boldsymbol{x}$中的元素为$x_1, \ldots, x_n$。向量$\boldsymbol{x}$的$L_p$范数为
 
-$$\|\boldsymbol{x}\|_p = \left(\sum_{i=1}^n |x_i|^p \right)^{1/p}.$$
+$$\|\boldsymbol{x}\|_p = \left(\sum_{i=1}^n \left|x_i \right|^p \right)^{1/p}.$$
 
-例如，$\boldsymbol{x}$的$L_1$范数是该向量元素绝对值的和：
+例如，$\boldsymbol{x}$的$L_1$范数是该向量元素绝对值之和：
 
-$$\|\boldsymbol{x}\|_1 = \sum_{i=1}^n |x_i|.$$
+$$\|\boldsymbol{x}\|_1 = \sum_{i=1}^n \left|x_i \right|.$$
 
 而$\boldsymbol{x}$的$L_2$范数是该向量元素平方和的平方根：
 
@@ -190,25 +190,25 @@ $$f'(x) = \lim_{h \rightarrow 0} \frac{f(x+h) - f(x)}{h},$$
 
 且假定该极限存在。给定$y = f(x)$，其中$x$和$y$分别是函数$f$的自变量和因变量。以下有关导数和微分的表达式等价：
 
-$$f'(x) = y' = \frac{dy}{dx} = \frac{df}{dx} = \frac{d}{dx} f(x) = Df(x) = D_x f(x),$$
+$$f'(x) = y' = \frac{\text{d}y}{\text{d}x} = \frac{\text{d}f}{\text{d}x} = \frac{\text{d}}{\text{d}x} f(x) = \text{D}f(x) = \text{D}_x f(x),$$
 
-其中符号$D$和$d/dx$也叫微分运算符。常见的微分演算有$DC = 0$（$C$为常数）、$Dx^n = nx^{n-1}$（$n$为常数）、$De^x = e^x$、$D\ln(x) = 1/x$等。
+其中符号$\text{D}$和$\text{d}/\text{d}x$也叫微分运算符。常见的微分演算有$\text{D}C = 0$（$C$为常数）、$\text{D}x^n = nx^{n-1}$（$n$为常数）、$\text{D}e^x = e^x$、$\text{D}\ln(x) = 1/x$等。
 
 如果函数$f$和$g$都可导，设$C$为常数，那么
 
 $$
 \begin{aligned}
-\frac{d}{dx} [Cf(x)] &= C \frac{d}{dx} f(x),\\
-\frac{d}{dx} [f(x) + g(x)] &= \frac{d}{dx} f(x) + \frac{d}{dx} g(x),\\ 
-\frac{d}{dx} [f(x)g(x)] &= f(x) \frac{d}{dx} [g(x)] + g(x) \frac{d}{dx} [f(x)],\\
-\frac{d}{dx} \left[\frac{f(x)}{g(x)}\right] &= \frac{g(x) \frac{d}{dx} [f(x)] - f(x) \frac{d}{dx} [g(x)]}{[g(x)]^2}.
+\frac{\text{d}}{\text{d}x} [Cf(x)] &= C \frac{\text{d}}{\text{d}x} f(x),\\
+\frac{\text{d}}{\text{d}x} [f(x) + g(x)] &= \frac{\text{d}}{\text{d}x} f(x) + \frac{\text{d}}{\text{d}x} g(x),\\ 
+\frac{\text{d}}{\text{d}x} [f(x)g(x)] &= f(x) \frac{\text{d}}{\text{d}x} [g(x)] + g(x) \frac{\text{d}}{\text{d}x} [f(x)],\\
+\frac{\text{d}}{\text{d}x} \left[\frac{f(x)}{g(x)}\right] &= \frac{g(x) \frac{\text{d}}{\text{d}x} [f(x)] - f(x) \frac{\text{d}}{\text{d}x} [g(x)]}{[g(x)]^2}.
 \end{aligned}
 $$
 
 
 如果$y=f(u)$和$u=g(x)$都是可导函数，依据链式法则，
 
-$$\frac{dy}{dx} = \frac{dy}{du} \frac{du}{dx}.$$
+$$\frac{\text{d}y}{\text{d}x} = \frac{\text{d}y}{\text{d}u} \frac{\text{d}u}{\text{d}x}.$$
 
 
 ### 泰勒展开
@@ -217,7 +217,7 @@ $$\frac{dy}{dx} = \frac{dy}{du} \frac{du}{dx}.$$
 
 $$f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!} (x-a)^n,$$
 
-其中$f^{(n)}$为函数$f$的$n$阶导数（求$n$次导数），$n!$为$n$的阶乘。假设$\epsilon$是个足够小的数，如果将上式中$x$和$a$分别替换成$x+\epsilon$和$x$，我们可以得到
+其中$f^{(n)}$为函数$f$的$n$阶导数（求$n$次导数），$n!$为$n$的阶乘。假设$\epsilon$是一个足够小的数，如果将上式中$x$和$a$分别替换成$x+\epsilon$和$x$，可以得到
 
 $$f(x + \epsilon) \approx f(x) + f'(x) \epsilon + \mathcal{O}(\epsilon^2).$$
 
@@ -236,9 +236,9 @@ $$ \frac{\partial u}{\partial x_i} = \lim_{h \rightarrow 0} \frac{f(x_1, \ldots,
 
 以下有关偏导数的表达式等价：
 
-$$\frac{\partial u}{\partial x_i} = \frac{\partial f}{\partial x_i} = f_{x_i} = f_i = D_i f = D_{x_i} f.$$
+$$\frac{\partial u}{\partial x_i} = \frac{\partial f}{\partial x_i} = f_{x_i} = f_i = \text{D}_i f = \text{D}_{x_i} f.$$
 
-为了计算$\partial u/\partial x_i$，我们只需将$x_1, \ldots, x_{i-1}, x_{i+1}, \ldots, x_n$视为常数并求$u$有关$x_i$的导数。
+为了计算$\partial u/\partial x_i$，只需将$x_1, \ldots, x_{i-1}, x_{i+1}, \ldots, x_n$视为常数并求$u$有关$x_i$的导数。
 
 
 
@@ -269,9 +269,9 @@ $$\nabla_{\boldsymbol{X}} \|\boldsymbol{X} \|_F^2 = 2\boldsymbol{X}.$$
 
 
 
-### 黑塞矩阵
+### 海森矩阵
 
-假设函数$f: \mathbb{R}^n \rightarrow \mathbb{R}$的输入是一个$n$维向量$\boldsymbol{x} = [x_1, x_2, \ldots, x_n]^\top$，输出是标量。假定函数$f$所有的二阶偏导数都存在，$f$的黑塞矩阵$\boldsymbol{H}$是一个$n$行$n$列的矩阵：
+假设函数$f: \mathbb{R}^n \rightarrow \mathbb{R}$的输入是一个$n$维向量$\boldsymbol{x} = [x_1, x_2, \ldots, x_n]^\top$，输出是标量。假定函数$f$所有的二阶偏导数都存在，$f$的海森矩阵$\boldsymbol{H}$是一个$n$行$n$列的矩阵：
 
 $$
 \boldsymbol{H} = 
@@ -295,26 +295,26 @@ $$\frac{\partial^2 f}{\partial x_i \partial x_j} = \frac{\partial }{\partial x_j
 
 ### 条件概率
 
-假设事件$A$和事件$B$的概率分别为$\mathbb{P}(A)$和$\mathbb{P}(B)$，两个事件同时发生的概率记作$\mathbb{P}(A \cap B)$或$\mathbb{P}(A, B)$。给定事件$B$，事件$A$的条件概率
+假设事件$A$和事件$B$的概率分别为$P(A)$和$P(B)$，两个事件同时发生的概率记作$P(A \cap B)$或$P(A, B)$。给定事件$B$，事件$A$的条件概率
 
-$$\mathbb{P}(A \mid B) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}.$$
+$$P(A \mid B) = \frac{P(A \cap B)}{P(B)}.$$
 
 也就是说，
 
-$$\mathbb{P}(A \cap B) = \mathbb{P}(B) \mathbb{P}(A \mid B) = \mathbb{P}(A) \mathbb{P}(B \mid A).$$
+$$P(A \cap B) = P(B) P(A \mid B) = P(A) P(B \mid A).$$
 
 当满足
 
-$$\mathbb{P}(A \cap B) = \mathbb{P}(A) \mathbb{P}(B)$$
+$$P(A \cap B) = P(A) P(B)$$
 
 时，事件$A$和事件$B$相互独立。
 
 
 ### 期望
 
-随机变量$X$的期望（或平均值）
+离散的随机变量$X$的期望（或平均值）为
 
-$$\mathbb{E}(X) = \sum_{x} x \mathbb{P}(X = x).$$
+$$E(X) = \sum_{x} x P(X = x).$$
 
 
 
@@ -327,12 +327,14 @@ $$\mathbb{E}(X) = \sum_{x} x \mathbb{P}(X = x).$$
 
 ## 小结
 
-* 本节总结了本书中涉及到的有关线性代数、微分和概率的基础知识。
+* 本节总结了本书中涉及的有关线性代数、微分和概率的基础知识。
 
 
 ## 练习
 
 * 求函数$f(\boldsymbol{x}) = 3x_1^2 + 5e^{x_2}$的梯度。
+
+
 
 
 ## 扫码直达[讨论区](https://discuss.gluon.ai/t/topic/6966)

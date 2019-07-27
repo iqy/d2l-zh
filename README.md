@@ -1,102 +1,37 @@
 # 动手学深度学习
 
-[![Build Status](http://ci.mxnet.io/job/gluon-tutorials-zh/badge/icon)](http://ci.mxnet.io/job/gluon-tutorials-zh/)
+[![Build Status](http://ci.d2l.ai/job/d2l-zh/job/master/badge/icon)](http://ci.d2l.ai/job/d2l-zh/job/master/)  
 
-主页在 [https://zh.gluon.ai/](https://zh.gluon.ai/)。
-
-请使用 [https://discuss.gluon.ai](https://discuss.gluon.ai) 讨论或报告问题。
+[本书网址：zh.d2l.ai](https://zh.d2l.ai/) | [1.0.0版rc0发布](https://github.com/d2l-ai/d2l-zh/releases/tag/v1.0.0-rc0) | [如何安装和使用书中源代码](http://zh.d2l.ai/chapter_prerequisite/install.html)
 
 
-## 如何贡献
+## 直播番外篇+赠全彩精装版（详情点击下方图片）
 
-所有notebook是用markdown格式存储，这样方便merge改动。jupyter可以通过notedown来直接使用markdown，[参考这里安装](./chapter_appendix/jupyter.md#用jupyter-notebook读写github源文件)
+[![](https://pic1.zhimg.com/80/v2-acf5fcf3cbe5172df78cb02fa548b7ac_hd.jpg)](https://zhuanlan.zhihu.com/p/71083285)
 
-build服务器在 http://ci.mxnet.io 。这台服务器有两块Nvidia M60。
 
-可以使用 http://zh.gluon.ai.s3-website-us-west-2.amazonaws.com/ 来访问没有加载过 CDN 的版本，对代码的改动刷新更快。
+## 英文版 *Dive into Deep Learning*
 
-## 编译HTML版本
+加州大学伯克利分校 2019 年春学期 *Introduction to Deep Learning* 课程教材。
 
-所有markdown文件需要在提交前清除output，它们会在服务器上重新执行生成结果。所以需要保证每个notebook执行不要太久，目前限制是20min。
+开源地址：[https://github.com/d2l-ai/d2l-en](https://github.com/d2l-ai/d2l-en)
 
-在本地可以如下build html（需要GPU支持）
+### 英文版引用
 
-```
-conda env update -f build/build.yml
-source activate gluon_zh_docs
-make html
-```
-
-生成的html会在`_build/html`。
-
-如果没有改动notebook里面源代码，所以不想执行notebook，可以使用
+BibTeX entry:
 
 ```
-make html EVAL=0
+@book{zhang2019dive,
+    title={Dive into Deep Learning},
+    author={Aston Zhang and Zachary C. Lipton and Mu Li and Alexander J. Smola},
+    note={\url{http://www.d2l.ai}},
+    year={2019}
+}
 ```
 
-但这样生成的html将不含有输出结果。
 
-## 编译PDF版本
+## 贡献
 
-编译pdf版本需要xelatex、librsvg2-bin（svg图片转pdf）和思源字体。在Ubuntu可以这样安装。
+感谢[社区贡献者们](https://github.com/d2l-ai/d2l-zh/graphs/contributors)为每一位读者改进这本开源书。
 
-```
-sudo apt-get install texlive-full
-sudo apt-get install librsvg2-bin
-```
-
-```
-wget https://github.com/adobe-fonts/source-han-sans/raw/release/OTF/SourceHanSansSC.zip
-wget https://github.com/adobe-fonts/source-han-serif/raw/release/OTF/SourceHanSerifSC_SB-H.zip
-wget https://github.com/adobe-fonts/source-han-serif/raw/release/OTF/SourceHanSerifSC_EL-M.zip
-
-unzip SourceHanSansSC.zip
-unzip SourceHanSerifSC_EL-M.zip
-unzip SourceHanSerifSC_SB-H.zip
-
-sudo mv SourceHanSansSC SourceHanSerifSC_EL-M SourceHanSerifSC_SB-H /usr/share/fonts/opentype/
-sudo fc-cache -f -v
-```
-
-这时候可以通过 `fc-list :lang=zh` 来查看安装的中文字体。
-
-同样的去下载和安装英文字体
-
-```
-wget -O source-serif-pro.zip https://www.fontsquirrel.com/fonts/download/source-serif-pro
-unzip source-serif-pro -d source-serif-pro
-sudo mv source-serif-pro /usr/share/fonts/opentype/
-
-wget -O source-sans-pro.zip https://www.fontsquirrel.com/fonts/download/source-sans-pro
-unzip source-sans-pro -d source-sans-pro
-sudo mv source-sans-pro /usr/share/fonts/opentype/
-
-wget -O source-code-pro.zip https://www.fontsquirrel.com/fonts/download/source-code-pro
-unzip source-code-pro -d source-code-pro
-sudo mv source-code-pro /usr/share/fonts/opentype/
-
-sudo fc-cache -f -v
-```
-
-然后可以编译了。
-
-```
-make pdf
-```
-
-## 其他安装
-
-```
-python -m spacy download en # 需已 pip install spacy
-```
-
-## 样式规范
-
-贡献请遵照本教程的[样式规范](STYLE_GUIDE.md)。
-
-
-## 中英文术语对照
-
-翻译请参照[中英文术语对照](TERMINOLOGY.md)。
-
+[如何贡献](https://zh.d2l.ai/chapter_appendix/how-to-contribute.html) | [致谢](https://zh.d2l.ai/chapter_preface/preface.html#致谢) | [讨论或报告问题](https://discuss.gluon.ai) | [其他](INFO.md)
